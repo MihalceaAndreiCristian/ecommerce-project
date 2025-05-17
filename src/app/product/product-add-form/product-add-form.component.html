@@ -1,0 +1,50 @@
+<h1 class="form-title">Add new product</h1>
+<form class="product-form" [formGroup]="productFormControl" (ngSubmit)="onSubmit()">
+  <mat-form-field class="product-form-field">
+    <mat-label>Name</mat-label>
+    <input class="form-input" type="text" matInput formControlName="name" [errorStateMatcher]="matcher"
+           placeholder="Name">
+    <mat-error *ngIf="productFormControl.get('name') && !productFormControl.hasError('required')">Please enter a
+      name for the product
+    </mat-error>
+    <mat-error *ngIf="productFormControl.hasError('required')">Name is <strong>required</strong></mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="product-form-field">
+    <mat-label>Description</mat-label>
+    <input type="text" matInput formControlName="description" [errorStateMatcher]="matcher"
+           placeholder="Description">
+    <mat-error *ngIf="productFormControl.get('description') && !productFormControl.hasError('required')">Please
+      enter a description for the product
+    </mat-error>
+    <mat-error *ngIf="productFormControl.hasError('required')">Description is <strong>required</strong></mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="product-form-field">
+    <mat-label>Price</mat-label>
+    <input type="number" matInput formControlName="price" [errorStateMatcher]="matcher"
+           placeholder="Price" (input)="sanitizeInput($event)">
+    <mat-error *ngIf="productFormControl.get('price') && !productFormControl.hasError('required')">Please
+      enter the price for the product
+    </mat-error>
+    <mat-error *ngIf="productFormControl.hasError('required')">Price is <strong>required</strong></mat-error>
+  </mat-form-field>
+
+  <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" multiple hidden>
+  <button class="add-files-button" mat-raised-button color="primary" (click)="fileInput.click()" type="button">
+    <mat-icon>upload</mat-icon> Selectează Fișiere <br> <span *ngIf="imagesToSave.length > 0">{{imagesToSave.length}}
+    files selected.
+  </span>
+  </button>
+  <!--    <mat-bottom-sheet-container>-->
+  <button class="button-submit-form" mat-button color="primary" type="submit">Submit</button>
+<!--    </mat-bottom-sheet-container>-->
+  <div  *ngIf="imagesToSave.length >0" class="photos-preview-container">
+    <h3>Preview imagini:</h3>
+    <div class="photos-preview" *ngFor="let image of imagesToSave;let index = index">
+      <button mat-button color="warn" (click)="removePhotoFromList(index)"  type="button"><mat-icon>remove</mat-icon>Remove</button>
+      <img [src]="image?.content" [alt]='image?.photoName || "Preview"' (click)="setMainPhoto(image)">
+      <mat-checkbox type="checkbox" [checked]="image.isMainPhoto" (change)="setMainPhoto(image)"> </mat-checkbox>
+    </div>
+  </div>
+</form>

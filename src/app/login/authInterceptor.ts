@@ -3,6 +3,7 @@ import {catchError, Observable, throwError} from "rxjs";
 import {Injectable} from "@angular/core";
 import {Router} from "@angular/router";
 import {getAuthToken} from "../util/utils";
+import {AUTHORIZATION} from "../util/constants";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -14,7 +15,7 @@ export class AuthInterceptor implements HttpInterceptor {
     if (req.url.includes("/login")) {
       handleNextStep = next.handle(req);
     } else {
-      const token = getAuthToken();
+      const token = getAuthToken(AUTHORIZATION);
       console.log(token);
       if (token) {
         const cloned = req.clone({
@@ -32,7 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
       .pipe(
         catchError((error: HttpErrorResponse) => {
           if (error.status === 401) {
-            alert('Sesiunea a expirat! Veți fi delogat.'); // Notificare pentru user
+            // alert('Sesiunea a expirat! Veți fi delogat.'); // Notificare pentru user
             this.router.navigate(['/login']); // Redirecționează spre pagina de login
           }
           return throwError(() => error);

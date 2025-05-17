@@ -16,4 +16,8 @@ export class ProductService {
 
     return this.http.request<Product[]>('GET',`${this.apiUrl}`,{observe: 'response'});
   }
+
+  addProduct(product: Product ): Observable<HttpResponse<Product>> {
+    return this.http.request('POST',`${this.apiUrl}/product/add`,{body: product, observe: 'response'});
+  }
 }

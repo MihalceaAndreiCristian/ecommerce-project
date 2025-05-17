@@ -1,0 +1,85 @@
+.form-title{
+  text-align: center;
+  margin:  2.5% 30%;
+  font-family: "Apple LiGothic", monospace;
+  font-size: 1.4rem;
+  color: brown;
+}
+body{
+  font-family: "Apple LiGothic", monospace;
+  color: brown;
+}
+
+.product-form{
+  display: flex;
+  margin: 0.75rem auto;
+  flex-direction: column;
+  max-width: 40%;
+}
+
+.photos-preview-container {
+  display: block;
+  flex-direction: column; /* H3 pe rândul lui */
+  align-items: center;
+  gap: 10px; /* Spațiu între titlu și imagini */
+}
+
+.photos-preview h3 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.photos-preview {
+  display: inline-flex;
+  flex-wrap: wrap; /* Permite trecerea imaginilor pe rândul următor dacă e necesar */
+  justify-content: center; /* Centrează imaginile pe rând */
+  flex-direction: column;
+  align-items: center;
+  margin-right: 2%;
+  margin-left: 1%;
+}
+/*.photos-preview {*/
+/*  display: inline-flex;*/
+/*  flex-wrap: wrap; !* Permite trecerea imaginilor pe rândul următor *!*/
+/*  justify-content: center; !* Centrează imaginile pe rând *!*/
+/*  align-items: center;*/
+/*  gap: 10px; !* Adaugă spațiu între imagini *!*/
+/*}*/
+.photos-preview img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: auto;
+  align-items: center;
+}
+
+.add-files{
+    max-width: 33%;
+  display: flex;
+  justify-content: center;
+  margin: auto auto 3%;
+}
+
+.add-files-button{
+  padding: 25px;
+  margin-bottom: 1rem;
+}
+.add-files-button:hover{
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.button-submit-form{
+  background-color: rgba(255, 188, 171, 0.52);
+  color: #1a83f6;
+  max-width: 33%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  padding: 1.25rem 2rem;
+}
+.button-submit-form:hover{
+  transform: scale(1.1);
+}

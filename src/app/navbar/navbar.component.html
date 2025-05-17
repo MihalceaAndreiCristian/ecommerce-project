@@ -1,0 +1,21 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="toolbar-row" >
+
+    <div>
+      {{ userName }}
+    </div>
+    <div *ngIf="isAdmin()">
+      <a mat-button [routerLink]="['/product/add']">Add product</a>
+    </div>
+
+    <a [routerLink]="['/user/my']" mat-button>
+      Contul meu
+    </a>
+    <a mat-button (click)="goBack()">Back</a>
+    <a mat-button (click)="onLogout()">LogOut</a>
+    <div class="search-container">
+      <input type="text" placeholder="Caută..."/>
+      <a (click)="search($event)">Căutare</a>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

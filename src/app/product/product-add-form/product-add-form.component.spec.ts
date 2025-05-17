@@ -1,0 +1,21 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { ProductAddFormComponent } from './product-add-form.component';
+
+describe('ProductAddFormComponent', () => {
+  let component: ProductAddFormComponent;
+  let fixture: ComponentFixture<ProductAddFormComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [ProductAddFormComponent]
+    });
+    fixture = TestBed.createComponent(ProductAddFormComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
