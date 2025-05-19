@@ -1,0 +1,43 @@
+<form [formGroup]="updateModalProductForm" (ngSubmit)="updateProduct()">
+<h2 mat-dialog-title>{{ product.name }}</h2>
+<mat-dialog-content class="mat-dialog-container">
+
+    <mat-card class="display-img">
+      <mat-card-content class="edit-fields">
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" [value]="product.name">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" [value]="product.description"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Price</mat-label>
+          <input matInput type="number"  formControlName="price" [value]="product.price">
+        </mat-form-field>
+      </mat-card-content>
+<!--todo display new images in this container-->
+      <div class="image-scroll-container">
+        <div class="image-wrapper" *ngFor="let image of displayPhotos();">
+          <img [src]="'data:image/' + image.extension + ';base64,' + image.content"
+               [alt]="image.photoName || 'Unavailable'"
+               [ngClass]="{'main-photo': image.isMainPhoto}">
+        </div>
+      </div>
+    </mat-card>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button color="warn" type="button" (click)="closeAndReset(false)">Close</button>
+  <button mat-button color="primary" type="submit">Save</button>
+  <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" multiple hidden>
+  <button class="add-files-button" mat-raised-button color="primary" (click)="fileInput.click()" type="button">
+    <mat-icon>upload</mat-icon> Selectează Fișiere <br> <span *ngIf="imagesAdded.length > 0">{{imagesAdded.length}}
+    files selected.
+  </span>
+  </button>
+</mat-dialog-actions>
+</form>

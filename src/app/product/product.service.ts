@@ -20,4 +20,13 @@ export class ProductService {
   addProduct(product: Product ): Observable<HttpResponse<Product>> {
     return this.http.request('POST',`${this.apiUrl}/product/add`,{body: product, observe: 'response'});
   }
+
+  getProductById(id:number): Observable<HttpResponse<Product>> {
+    return this.http.request('GET',`${this.apiUrl}/product/${id}`,{observe: 'response'});
+  }
+
+
+  updateProduct(product: Product ): Observable<HttpResponse<Product>> {
+    return this.http.request('PATCH',`${this.apiUrl}/product/edit/${product.id}`,{body: product, observe: 'response'});
+  }
 }

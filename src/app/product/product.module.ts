@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { ProductListComponent } from './product-list/product-list.component';
 import {NavbarModule} from "../navbar/navbar.module";
 import {MatCardModule} from "@angular/material/card";
@@ -14,13 +14,16 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { ModalProductComponent } from './modal-product/modal-product.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 
 @NgModule({
   declarations: [
     ProductListComponent,
-    ProductAddFormComponent
+    ProductAddFormComponent,
+    ModalProductComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +39,9 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     MatButtonToggleModule,
     MatButtonModule,
     MatIconModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDialogModule,
+    NgOptimizedImage
   ]
 })
 export class ProductModule { }

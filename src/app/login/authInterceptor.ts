@@ -1,13 +1,13 @@
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {catchError, Observable, throwError} from "rxjs";
+import {catchError, EMPTY, Observable, throwError} from "rxjs";
 import {Injectable} from "@angular/core";
 import {Router} from "@angular/router";
 import {getAuthToken} from "../util/utils";
-import {AUTHORIZATION} from "../util/constants";
+import {ModalService} from "../product/modal-product/modal.service";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private router: Router) {
+  constructor(private router: Router, private modalService:ModalService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -15,8 +15,7 @@ export class AuthInterceptor implements HttpInterceptor {
     if (req.url.includes("/login")) {
       handleNextStep = next.handle(req);
     } else {
-      const token = getAuthToken(AUTHORIZATION);
-      console.log(token);
+      const token = getAuthToken();
       if (token) {
         const cloned = req.clone({
           setHeaders: {
@@ -32,11 +31,16 @@ export class AuthInterceptor implements HttpInterceptor {
     return handleNextStep
       .pipe(
         catchError((error: HttpErrorResponse) => {
+          this.modalService.closeModal();
           if (error.status === 401) {
             // alert('Sesiunea a expirat! Veți fi delogat.'); // Notificare pentru user
             this.router.navigate(['/login']); // Redirecționează spre pagina de login
           }
-          return throwError(() => error);
+          if (error.status === 403) {
+            console.error(error);
+          }
+          // return throwError(() => error);
+          return EMPTY;
         })
       );
 

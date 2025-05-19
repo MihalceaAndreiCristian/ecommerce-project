@@ -22,8 +22,9 @@
 
   <mat-form-field class="product-form-field">
     <mat-label>Price</mat-label>
-    <input type="number" matInput formControlName="price" [errorStateMatcher]="matcher"
-           placeholder="Price" (input)="sanitizeInput($event)">
+    <input type="text" matInput formControlName="price" [errorStateMatcher]="matcher"
+           placeholder="Price" (input)="formatPrice($event, productFormControl)"
+           (keydown)="validateNumberInput($event)">
     <mat-error *ngIf="productFormControl.get('price') && !productFormControl.hasError('required')">Please
       enter the price for the product
     </mat-error>
@@ -32,19 +33,21 @@
 
   <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" multiple hidden>
   <button class="add-files-button" mat-raised-button color="primary" (click)="fileInput.click()" type="button">
-    <mat-icon>upload</mat-icon> Selectează Fișiere <br> <span *ngIf="imagesToSave.length > 0">{{imagesToSave.length}}
+    <mat-icon>upload</mat-icon>
+    Selectează Fișiere <br> <span *ngIf="imagesToSave.length > 0">{{ imagesToSave.length }}
     files selected.
   </span>
   </button>
-  <!--    <mat-bottom-sheet-container>-->
   <button class="button-submit-form" mat-button color="primary" type="submit">Submit</button>
-<!--    </mat-bottom-sheet-container>-->
-  <div  *ngIf="imagesToSave.length >0" class="photos-preview-container">
+  <div *ngIf="imagesToSave.length >0" class="photos-preview-container">
     <h3>Preview imagini:</h3>
     <div class="photos-preview" *ngFor="let image of imagesToSave;let index = index">
-      <button mat-button color="warn" (click)="removePhotoFromList(index)"  type="button"><mat-icon>remove</mat-icon>Remove</button>
+      <button mat-button color="warn" (click)="removePhotoFromList(index)" type="button">
+        <mat-icon>remove</mat-icon>
+        Remove
+      </button>
       <img [src]="image?.content" [alt]='image?.photoName || "Preview"' (click)="setMainPhoto(image)">
-      <mat-checkbox type="checkbox" [checked]="image.isMainPhoto" (change)="setMainPhoto(image)"> </mat-checkbox>
+      <mat-checkbox type="checkbox" [checked]="image.isMainPhoto" (change)="setMainPhoto(image)"></mat-checkbox>
     </div>
   </div>
 </form>

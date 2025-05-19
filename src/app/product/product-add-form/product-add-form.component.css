@@ -1,9 +1,9 @@
 .form-title{
   text-align: center;
   margin:  2.5% 30%;
-  font-family: "Apple LiGothic", monospace;
+  /*font-family: "Apple LiGothic", monospace;*/
   font-size: 1.4rem;
-  color: brown;
+  color: #1a83f6;
 }
 body{
   font-family: "Apple LiGothic", monospace;
@@ -39,13 +39,7 @@ body{
   margin-right: 2%;
   margin-left: 1%;
 }
-/*.photos-preview {*/
-/*  display: inline-flex;*/
-/*  flex-wrap: wrap; !* Permite trecerea imaginilor pe rândul următor *!*/
-/*  justify-content: center; !* Centrează imaginile pe rând *!*/
-/*  align-items: center;*/
-/*  gap: 10px; !* Adaugă spațiu între imagini *!*/
-/*}*/
+
 .photos-preview img {
   width: 150px;
   height: 150px;
@@ -63,8 +57,9 @@ body{
 }
 
 .add-files-button{
-  padding: 25px;
-  margin-bottom: 1rem;
+  margin: 1rem auto;
+  width: auto;
+  padding: 1.5rem 2rem;
 }
 .add-files-button:hover{
   transform: scale(1.05);
